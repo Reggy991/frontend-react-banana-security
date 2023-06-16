@@ -19,16 +19,15 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route
                         path="/profile"
-                        element={
-                            isAuth ? (
+                        element={ isAuth ? (
                                 <Profile />
                             ) : (
                                 <Navigate to="/" />
                             )
                         }
                     />
-                    <Route path="/signin" element={<SignIn />} />
-                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<SignIn />} />
+                    <Route path="/register" element={<SignUp />} />
                 </Routes>
             </div>
         </>
