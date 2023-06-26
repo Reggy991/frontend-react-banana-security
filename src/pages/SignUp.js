@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {AuthContext} from "../context/AuthContext";
@@ -10,6 +10,7 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
+    const controller = new AbortController();
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -30,6 +31,8 @@ function SignUp() {
                 email,
                 password,
                 username,
+            }, {
+                signal: controller.signal,
             });
             login(response.data.accessToken);
             navigate('/profile');
@@ -38,6 +41,12 @@ function SignUp() {
             // Hier je error handling in de UI.
         }
     };
+
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
+        };
+    }, []);
 
     return (
         <>
