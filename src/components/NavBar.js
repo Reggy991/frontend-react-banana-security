@@ -21,14 +21,14 @@ function NavBar() {
       <div>
         <button
           type="button"
-          onClick={isAuth ? logout : signInPage}
+          onClick={isAuth ? logout : () => navigate('/login')}
         >
           {isAuth ? "Log out" : "Log in"}
         </button>
         { !isAuth && (
             <button
               type="button"
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/register')}
         >
             Registreren
             </button>
